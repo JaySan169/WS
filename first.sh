@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "new world"
+echo "new world"echo ""[Dsecond world"
