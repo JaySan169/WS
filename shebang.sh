@@ -36,7 +36,66 @@ echo third value is $3
 echo -e "PID:$$"
 
 read -p "Enter Name: " Name
-echo "Welcome,$Name"
+
+stat()
+{
+
+echo -e "\nWelcome,\e[31m $Name \e[0m you are working on process id:\e[32m $$ \e[0m"
+
+}
+
+echo -e "\n\ncalling ur function...."
+stat
+
+
+z=47
+
+echo "$z"
+echo '$z'
+echo "$?"
+
+
+read -p "Enter Option to Start or Stop ur service... : " opt
+
+case $opt in
+    start)
+        echo -e "\e[32m Starting...\e[0m"
+        ;;
+    stop)
+        echo -e "\e[31m Stopping...\e[0m"
+        ;;
+    *)
+	    echo "InValid...(Enter start  or stop)"
+        ;;
+esac
+
+
+if [ 1 -gt 0 ]; then
+            echo "true"
+    fi 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
