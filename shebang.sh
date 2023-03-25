@@ -35,6 +35,9 @@ echo third value is $3
 
 echo -e "PID:$$"
 
+read -p "Enter Name: " Name
+echo "Welcome,$Name"
+
 
 
 
