@@ -55,29 +55,54 @@ echo '$z'
 echo "$?"
 
 
-read -p "Enter Option to Start or Stop ur service... : " opt
+read -p "Enter Option to s=Start or x=Stop ur service... : " opt
 
 case $opt in
-    start)
+    s)
         echo -e "\e[32m Starting...\e[0m"
         ;;
-    stop)
+    x)
         echo -e "\e[31m Stopping...\e[0m"
         ;;
     *)
-	    echo "InValid...(Enter start  or stop)"
+	    echo "InValid...(Enter s=start  or x=stop)"
         ;;
 esac
 
 
+
+
 if [ 1 -gt 0 ]; then
-            echo "true"
-    fi 
+   echo "true"
+fi 
+
+
+
+
+if [ 1 -lt 0 ] ; then
+    echo "true"
+else 
+    echo "false"
+fi
 
 
 
 
 
+   if [ 0 -gt 1 ] ; then
+        
+        echo "Negative"
+
+    elif [ 0 -gt 2 ] ; then 
+        echo "Negative"
+    
+    elif [ 0 -gt 3 ] ; then 
+        echo "Negative"
+    
+    else 
+        
+        echo "positive"
+    fi
 
 
 
