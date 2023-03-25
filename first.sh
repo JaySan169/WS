@@ -4,3 +4,4 @@ my first sh file
 echo "my first bash command"
 now iam ready
 thaks to boda bhai
+ye mere boda bhoi ko komal ho
