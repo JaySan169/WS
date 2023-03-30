@@ -10,7 +10,7 @@ curl -sL https://rpm.nodesource.com/setup_lts.x | bash  &>> $LOGFILE
 stat $?
 
 echo -n "Installing Node JS :"
-yum install nodejs make gcc-c++ -y &>> $LOGFILE
+yum install nodejs -y &>> $LOGFILE
 stat $?
 
 id $APPUSER &>> $LOGFILE
