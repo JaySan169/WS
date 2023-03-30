@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 COMPONENT=frontend
-
+source components/common.sh
 
 echo -n "installing nginx :"
 yum install nginx -y &>> $LOGFILE
