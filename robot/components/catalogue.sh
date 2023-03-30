@@ -40,7 +40,7 @@ npm install &>> $LOGFILE
 stat $?
 
 echo -n "Changing Permissions to  $APPUSER"
-chown $APPUSER:$APPUSER /home/$APPUSER/$COMPONENT
+chown $APPUSER:$APPUSER /home/$APPUSER/$COMPONENT && chmod -R 775 /home/$APPUSER/$COMPONENT
 stat $?
 
 echo -n "configuring $COMPONENT service"
