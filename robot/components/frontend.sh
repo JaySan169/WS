@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 COMPONENT=frontend
-
 USERID=$(id -u)
+LOGFILE=/tmp/$COMPONENT.log
 
 if [ $USERID -ne 0 ] ; then
     echo -e "\e[31m be a root user or use sudo \e[0m"
@@ -18,7 +18,7 @@ stat() {
 }
 
 echo -n "installing nginx :"
-yum install nginx -y &>> /tmp/$COMPONENT.log
+yum install nginx -y &>> $LOGFILE
 stat $?
 
 echo -n "downloading component :"
@@ -26,13 +26,13 @@ curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/$COMPO
 stat $?
 
 echo -n "performing cleanup"
-rm -rf /usr/share/nginx/html/* &>> /tmp/$COMPONENT.log
+rm -rf /usr/share/nginx/html/* &>> $LOGFILE
 stat $?
 
 cd /usr/share/nginx/html
 
 echo -n "unzipping component :"
-unzip /tmp/$COMPONENT.zip &>> /tmp/$COMPONENT.log
+unzip /tmp/$COMPONENT.zip &>> $LOGFILE
 stat $?
 
 mv $COMPONENT-main/* .
@@ -43,5 +43,5 @@ echo -n "configuring server proxies :"
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
 stat $?
 
-systemctl enable nginx &>> /tmp/$COMPONENT.log
+systemctl enable nginx &>> $LOGFILE
 systemctl start nginx
