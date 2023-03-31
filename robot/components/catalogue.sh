@@ -13,7 +13,7 @@ echo -n "Installing Node JS :"
 yum install nodejs gcc-c++ -y &>> $LOGFILE
 stat $?
 
-# id $APPUSER &>> $LOGFILE
+id $APPUSER &>> $LOGFILE
 if [ $? -ne 0 ] ; then 
     echo -n "Creating app user :"
     useradd $APPUSER
