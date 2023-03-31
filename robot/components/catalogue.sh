@@ -36,7 +36,7 @@ stat $?
 
 echo -n "Installing Dependancies:"
 cd $COMPONENT
-#npm install &>> $LOGFILE
+npm install &>> $LOGFILE
 stat $?
 
 echo -n "Changing Permissions to  $APPUSER"
