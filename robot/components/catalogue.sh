@@ -10,7 +10,7 @@ stat $?
 
 echo -n "Configuring & Installing Node JS :"
 curl –sL https://rpm.nodesource.com/setup_10.x | sudo bash - &>> $LOGFILE
-yum install –y nodejs &>> $LOGFILE
+yum install –y nodejs --skip-broken &>> $LOGFILE
 stat $?
 
 id $APPUSER &>> $LOGFILE
