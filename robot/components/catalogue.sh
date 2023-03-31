@@ -6,11 +6,11 @@ APPUSER=roboshop
 
 
 echo -n "Configuring Node JS :"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash  &>> $LOGFILE
+curl –sL https://rpm.nodesource.com/setup_10.x | sudo bash -  &>> $LOGFILE
 stat $?
 
 echo -n "Installing Node JS :"
-yum install nodejs make gcc-c++ -y &>> $LOGFILE
+yum install –y nodejs &>> $LOGFILE
 stat $?
 
 id $APPUSER &>> $LOGFILE
