@@ -5,12 +5,7 @@ source components/common.sh
 APPUSER=roboshop
 
 echo -n "Configuring & Installing Node JS :"
-curl -sL https://nodejs.org/dist/v18.15.0/node-v18.15.0-linux-x64.tar.xz
-tar -xvf node-v18.15.0-linux-x64.tar.xz
-cd node-v18.15.0-linux-x64
-yum install gcc-c++ make -y &>> $LOGFILE
-./configure
-make install &>> $LOGFILE
+ echo "1"
 stat $?
 
 id $APPUSER &>> $LOGFILE
