@@ -5,7 +5,7 @@ source components/common.sh
 APPUSER=roboshop
 
 echo -n "Configuring libstdc++ :"
-yum install gcc-c++  &>> $LOGFILE
+yum install libstdc++  &>> $LOGFILE
 stat $?
 
 echo -n "Configuring Node JS :"
