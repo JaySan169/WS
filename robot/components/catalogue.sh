@@ -8,9 +8,10 @@ echo -n "Configuring & Installing Node JS :"
  echo "1"
 stat $?
 
-id $APPUSER
+id $(APPUSER) &>> $LOGFILE
+
+echo -n "Creating app user :"
 if [ $? -ne 0 ] ; then 
-    echo -n "Creating app user :"
     useradd $APPUSER
     stat $?
 fi
