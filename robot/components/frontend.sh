@@ -3,7 +3,7 @@ set -e
 COMPONENT=frontend
 source components/common.sh
 
-echo -n "installing nginx $(COMPONENT) :"
+echo -n "installing nginx $COMPONENT :"
 yum install nginx -y &>> $LOGFILE
 stat $?
 
