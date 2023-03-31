@@ -10,11 +10,11 @@ curl -sL https://rpm.nodesource.com/setup_lts.x | bash  &>> $LOGFILE
 stat $?
 
 echo -n "Installing Node JS :"
-yum install nodejs gcc-c++ -y &>> $LOGFILE
+yum install nodejs -y &>> $LOGFILE
 stat $?
 
 id $APPUSER &>> $LOGFILE
-if [ $? -ne 0 ] ; then 
+if [ $? -ne 0 ]; then 
     echo -n "Creating app user :"
     useradd $APPUSER
     stat $?
@@ -25,17 +25,17 @@ curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalog
 stat $?
 
 echo -n "moving files :"
-cd /home/$APPUSER
-unzip /tmp/catalogue.zip &>> $LOGFILE
+cd /home/$APPUSER/
+unzip -o /tmp/catalogue.zip &>> $LOGFILE
 stat $?
 
 echo -n "Performing cleanup :"
 rm -rf $COMPONENT
 mv catalogue-main catalogue
-cd /home/$APPUSERop/catalogue
 stat $?
 
 echo -n "Installing Dependancies:"
+cd $COMPONENT
 npm install &>> $LOGFILE
 stat $?
 
@@ -44,7 +44,7 @@ chown $APPUSER:$APPUSER /home/$APPUSER/$COMPONENT && chmod -R 775 /home/$APPUSER
 stat $?
 
 echo -n "configuring $COMPONENT service"
-sed -e -i 's/MONGO_DNSNAME/172.31.53.28/' /home/$APPUSER/$COMPONENT/systemd.service
+sed -i -e 's/MONGO_DNSNAME/172.31.53.28/' /home/$APPUSER/$COMPONENT/systemd.service
 mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
 stat $?
 
