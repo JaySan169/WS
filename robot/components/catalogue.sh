@@ -9,9 +9,12 @@ yum install libstdc++ &>> $LOGFILE
 stat $?
 
 echo -n "Configuring & Installing Node JS :"
-yum install gcc-c++ make &>> $LOGFILE
-curl -sL https://rpm.nodesource.com/setup_13.x | bash &>> $LOGFILE
-yum install nodejs -y &>> $LOGFILE
+yum install gcc-c++ make -y &>> $LOGFILE
+curl -sL https://nodejs.org/dist/v18.15.0/node-v18.15.0-linux-x64.tar.xz
+tar -xvf node-v18.15.0-linux-x64.tar.xz
+cd node-v18.15.0-linux-x64
+./configure
+make install &>> $LOGFILE
 stat $?
 
 id $APPUSER &>> $LOGFILE
