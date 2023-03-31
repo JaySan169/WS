@@ -19,27 +19,27 @@ curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalog
 stat $?
 
 echo -n "moving files :"
-cd /home/$APPUSER
+cd /home/roboshop
 unzip /tmp/catalogue.zip &>> $LOGFILE
 stat $?
 
 echo -n "Performing cleanup :"
 rm -rf $COMPONENT
 mv catalogue-main catalogue
-cd /home/$APPUSERop/catalogue
+cd /home/roboshop/catalogue
 stat $?
 
 echo -n "Installing Dependancies:"
 npm install &>> $LOGFILE
 stat $?
 
-echo -n "Changing Permissions to  $APPUSER"
-chown $APPUSER:$APPUSER /home/$APPUSER/$COMPONENT && chmod -R 775 /home/$APPUSER/$COMPONENT
+echo -n "Changing Permissions to  roboshop"
+chown roboshop:roboshop /home/roboshop/$COMPONENT && chmod -R 775 /home/roboshop/$COMPONENT
 stat $?
 
 echo -n "configuring $COMPONENT service"
-sed -e -i 's/MONGO_DNSNAME/172.31.53.28/' /home/$APPUSER/$COMPONENT/systemd.service
-mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
+sed -e -i 's/MONGO_DNSNAME/172.31.53.28/' /home/roboshop/$COMPONENT/systemd.service
+mv /home/roboshop/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
 stat $?
 
 
