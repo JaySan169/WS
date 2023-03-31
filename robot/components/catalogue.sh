@@ -9,8 +9,9 @@ yum install libstdc++ &>> $LOGFILE
 stat $?
 
 echo -n "Configuring & Installing Node JS :"
-curl –sL https://rpm.nodesource.com/setup_10.x | sudo bash - &>> $LOGFILE
-yum install –y nodejs --skip-broken &>> $LOGFILE
+yum install gcc-c++ make &>> $LOGFILE
+curl -sL https://rpm.nodesource.com/setup_13.x | bash &>> $LOGFILE
+yum install nodejs -y &>> $LOGFILE
 stat $?
 
 id $APPUSER &>> $LOGFILE
