@@ -19,8 +19,8 @@ curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalog
 stat $?
 
 echo -n "moving files :"
-cd /home/roboshop
 unzip /tmp/catalogue.zip &>> $LOGFILE
+cd /home/roboshop
 stat $?
 
 echo -n "Performing cleanup :"
