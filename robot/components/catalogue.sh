@@ -8,15 +8,9 @@ echo -n "Configuring libstdc++ :"
 yum install libstdc++ &>> $LOGFILE
 stat $?
 
-echo -n "Configuring Node JS :"
-yum install node
-curl –sL https://rpm.nodesource.com/setup_10.x | sudo bash -
-yum install –y nodejs
-#curl –s -L "https://rpm.nodesource.com/setup_10.x" | bash &>> $LOGFILE
-stat $?
-
-echo -n "Installing Node JS :"
-yum install nodejs -y &>> $LOGFILE
+echo -n "Configuring & Installing Node JS :"
+curl –sL https://rpm.nodesource.com/setup_10.x | sudo bash - &>> $LOGFILE
+yum install –y nodejs &>> $LOGFILE
 stat $?
 
 id $APPUSER &>> $LOGFILE
