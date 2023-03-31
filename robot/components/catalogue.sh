@@ -4,13 +4,19 @@ COMPONENT=catalogue
 source components/common.sh
 APPUSER=roboshop
 
-echo -n "Configuring & Installing Node JS :"
- echo "1"
+
+echo -n "Configuring Node JS :"
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash  &>> $LOGFILE
 stat $?
 
-echo -n "Creating app user :"
+echo -n "Installing Node JS :"
+yum install nodejs gcc-c++ -y &>> $LOGFILE
+stat $?
+
+# id $APPUSER &>> $LOGFILE
 if [ $? -ne 0 ] ; then 
-    useradd roboshop
+    echo -n "Creating app user :"
+    useradd $APPUSER
     stat $?
 fi
 
@@ -19,27 +25,27 @@ curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalog
 stat $?
 
 echo -n "moving files :"
+cd /home/$APPUSER
 unzip /tmp/catalogue.zip &>> $LOGFILE
-cd /home/roboshop
 stat $?
 
 echo -n "Performing cleanup :"
 rm -rf $COMPONENT
 mv catalogue-main catalogue
-cd /home/roboshop/catalogue
+cd /home/$APPUSERop/catalogue
 stat $?
 
 echo -n "Installing Dependancies:"
 npm install &>> $LOGFILE
 stat $?
 
-echo -n "Changing Permissions to  roboshop"
-chown roboshop:roboshop /home/roboshop/$COMPONENT && chmod -R 775 /home/roboshop/$COMPONENT
+echo -n "Changing Permissions to  $APPUSER"
+chown $APPUSER:$APPUSER /home/$APPUSER/$COMPONENT && chmod -R 775 /home/$APPUSER/$COMPONENT
 stat $?
 
 echo -n "configuring $COMPONENT service"
-sed -e -i 's/MONGO_DNSNAME/172.31.53.28/' /home/roboshop/$COMPONENT/systemd.service
-mv /home/roboshop/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
+sed -e -i 's/MONGO_DNSNAME/172.31.53.28/' /home/$APPUSER/$COMPONENT/systemd.service
+mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
 stat $?
 
 
