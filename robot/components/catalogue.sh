@@ -20,8 +20,6 @@ id $APPUSER &>> $LOGFILE
         stat $?
     fi
 
-#useradd roboshop
-
 echo -n "Downloading $COMPONENT :"
 curl -s -L -o /tmp/catalogue.zip "https://github.com/stans-robot-project/catalogue/archive/main.zip" &>> $LOGFILE
 stat $?
