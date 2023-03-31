@@ -8,11 +8,9 @@ echo -n "Configuring & Installing Node JS :"
  echo "1"
 stat $?
 
-id "$APPUSER" &>> $LOGFILE
-
 echo -n "Creating app user :"
 if [ $? -ne 0 ] ; then 
-    useradd $APPUSER
+    useradd roboshop
     stat $?
 fi
 
