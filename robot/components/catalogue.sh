@@ -11,7 +11,6 @@ stat $?
 
 echo -n "Installing Node JS :"
 #yum install nodejs -y &>> $LOGFILE
-echo "1"
 stat $?
 
 id $APPUSER &>> $LOGFILE
