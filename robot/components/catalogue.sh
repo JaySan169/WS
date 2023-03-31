@@ -6,7 +6,7 @@ APPUSER=roboshop
 
 
 echo -n "Configuring Node JS :"
-curl –sL https://rpm.nodesource.com/setup_10.x | sudo bash -  &>> $LOGFILE
+curl –sL https://rpm.nodesource.com/setup_10.x | bash -  &>> $LOGFILE
 stat $?
 
 echo -n "Installing Node JS :"
