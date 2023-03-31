@@ -44,7 +44,7 @@ chown $APPUSER:$APPUSER /home/$APPUSER/$COMPONENT && chmod -R 775 /home/$APPUSER
 stat $?
 
 echo -n "configuring $COMPONENT service"
-sed -i -e 's/MONGO_DNSNAME/172.31.53.28/' /home/$APPUSER/$COMPONENT/systemd.service
+sed -i -e 's/MONGO_DNSNAME/172.31.5.219/' /home/$APPUSER/$COMPONENT/systemd.service
 mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service
 stat $?
 
