@@ -4,15 +4,11 @@ COMPONENT=catalogue
 source components/common.sh
 APPUSER=roboshop
 
-echo -n "Configuring libstdc++ :"
-yum install libstdc++ &>> $LOGFILE
-stat $?
-
 echo -n "Configuring & Installing Node JS :"
-yum install gcc-c++ make -y &>> $LOGFILE
 curl -sL https://nodejs.org/dist/v18.15.0/node-v18.15.0-linux-x64.tar.xz
 tar -xvf node-v18.15.0-linux-x64.tar.xz
 cd node-v18.15.0-linux-x64
+yum install gcc-c++ make -y &>> $LOGFILE
 ./configure
 make install &>> $LOGFILE
 stat $?
