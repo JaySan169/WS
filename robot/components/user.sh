@@ -13,12 +13,14 @@ echo -n "Installing Node JS :"
 yum install nodejs -y &>> $LOGFILE
 stat $?
 
-id $APPUSER &>> $LOGFILE
-    if [ $? -ne 0 ]; then 
-        echo -n "Creating app user :"
-        useradd roboshop
-        stat $?
-    fi
+#id $APPUSER &>> $LOGFILE
+#    if [ $? -ne 0 ]; then 
+#        echo -n "Creating app user :"
+#        useradd roboshop
+#        stat $?
+#    fi
+
+useradd roboshop
 
 echo -n "Downloading $COMPONENT :"
 curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip" &>> $LOGFILE
