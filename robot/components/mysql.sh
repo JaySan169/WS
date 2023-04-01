@@ -1,6 +1,6 @@
 #!/bin/bash
-
-COMPONENT=user
+set -e
+COMPONENT=mysql
 source components/common.sh
 
 echo -n "configuring the $COMPONENT repo:" 
