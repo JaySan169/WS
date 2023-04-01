@@ -4,10 +4,13 @@ COMPONENT=redis
 source components/common.sh
 
 echo -n "configuring $COMPONENT repo:"
+wget https://download.redis.io/releases/redis-6.2.7.tar.gz &>> $LOGFILE
+tar -xvf redis-6.2.7.tar.gz &>> $LOGFILE
+cd ./redis-6.2.7/
 #yum install epel-release yum-utils -y &>> $LOGFILE
 #yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y &>> $LOGFILE
 #yum-config-manager --enable remi &>> $LOGFILE
-curl -L "https://raw.githubusercontent.com/stans-robot-project/$COMPONENT/main/redis.repo" -o /etc/yum.repos.d/redis.repo &>> $LOGFILE
+#curl -L "https://raw.githubusercontent.com/stans-robot-project/$COMPONENT/main/redis.repo" -o /etc/yum.repos.d/redis.repo &>> $LOGFILE
 stat $?
 
 
