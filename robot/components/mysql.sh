@@ -4,11 +4,7 @@ COMPONENT=mysql
 source components/common.sh
 
 echo -n "configuring the $COMPONENT repo:" 
-echo '[mysql57-community]
-name=MySQL 5.7 Community Server
-baseurl=http://repo.mysql.com/yum/mysql-5.7-community/el/7/$basearch/
-enabled=1
-gpgcheck=0' > /etc/yum.repos.d/mysql.repo &>> $LOGFILE
+curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/stans-robot-project/mysql/main/mysql.repo &>> $LOGFILE
 stat $?
 
 echo -n "Installing $COMPONENT:"
@@ -41,11 +37,11 @@ fi
 echo -n "Downloading the $COMPONENT Schema: "
 cd /tmp
 curl -s -L -o /tmp/mysql.zip "https://github.com/stans-robot-project/mysql/archive/main.zip"
-unzip -o $COMPONENT.zip
+unzip -o $COMPONENT.zip &>> $LOGFILE
 
 echo -n "Injecting the $COMPONENT Schema: "
 cd /tmp/$COMPONENT-main
-mysql -u root -pRoboShop@1 <shipping.sql
+mysql -u root -pRoboShop@1 <shipping.sql &>> $LOGFILE
 
 
 echo -n -e "\e[32m___________ $COMPONENT installation completed______________\e[0m"
