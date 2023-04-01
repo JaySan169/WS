@@ -17,11 +17,11 @@ yum install redis -y &>> $LOGFILE
 stat $?
 
 echo -n "whitelisting redis to others :"
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf &>> $LOGFILE
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf && -e 's/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf &>> $LOGFILE
 stat $?
 
 echo -n "Starting redis service:"
 systemctl daemon-reload
-systemctl enable redis &>> $LOGFILE
 systemctl start redis
+systemctl enable redis &>> $LOGFILE
 stat $?
