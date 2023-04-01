@@ -23,5 +23,4 @@ stat $?
 echo -n "Starting redis service:"
 systemctl daemon-reload
 systemctl start redis
-systemctl enable redis &>> $LOGFILE
 stat $?
