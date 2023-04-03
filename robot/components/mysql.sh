@@ -39,10 +39,11 @@ echo -n "Downloading the $COMPONENT Schema: "
 cd /tmp
 curl -s -L -o /tmp/mysql.zip "https://github.com/stans-robot-project/mysql/archive/main.zip"
 unzip -o $COMPONENT.zip &>> $LOGFILE
+stat $?
 
 echo -n "Injecting the $COMPONENT Schema: "
 cd /tmp/$COMPONENT-main
 mysql -u root -p${MYSQL_PWD} <shipping.sql &>> $LOGFILE
-
+stat $?
 
 echo -n -e "\e[32m___________ $COMPONENT installation completed______________\e[0m"
