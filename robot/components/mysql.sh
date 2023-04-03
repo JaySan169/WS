@@ -25,6 +25,7 @@ stat $?
 echo show databases | mysql -u root -p${MYSQL_PWD} &>> $LOGFILE
 if [ $? -ne 0 ] ; then
 echo -n "Reset root password:"
+echo "${MYSQL_PWD}"
 echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PWD}';" | mysql --connect-expired-password -uroot -p"${DEF_ROOT_PASSWORD}" &>> $LOGFILE
 stat $?
 fi
