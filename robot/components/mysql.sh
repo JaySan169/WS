@@ -22,19 +22,17 @@ echo -n "Changing the default pasword:"
 DEF_ROOT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | awk -F ' ' '{print $NF}') &>> $LOGFILE
 stat $?
 
-echo show databases | mysql -u root -p${MYSQL_PWD} &>> $LOGFILE
-if [ $? -ne 0 ] ; then
-echo -n "Reset root password:"
-echo "${MYSQL_PWD}"
-echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PWD}';" | mysql --connect-expired-password -uroot -p"${DEF_ROOT_PASSWORD}" &>> $LOGFILE
-stat $?
-fi
-
 echo show plugins | mysql -u root -p${MYSQL_PWD} | grep validate_password; &>> $LOGFILE
 if [ $? -eq 0 ] ; then
 echo -n "uninstalling password validate plugin"
-echo "${MYSQL_PWD}"
 echo "uninstall plugin validate_password;" | mysql --connect-expired-password -uroot -p${MYSQL_PWD}
+stat $?
+fi
+
+echo show databases | mysql -u root -p${MYSQL_PWD} &>> $LOGFILE
+if [ $? -ne 0 ] ; then
+echo -n "Reset root password:"
+echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_PWD}';" | mysql --connect-expired-password -uroot -p"${DEF_ROOT_PASSWORD}" &>> $LOGFILE
 stat $?
 fi
 
