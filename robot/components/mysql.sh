@@ -33,6 +33,7 @@ fi
 echo show plugins | mysql -u root -p${MYSQL_PWD} | grep validate_password; &>> $LOGFILE
 if [ $? -eq 0 ] ; then
 echo -n "uninstalling password validate plugin"
+echo "${MYSQL_PWD}"
 echo "uninstall plugin validate_password;" | mysql --connect-expired-password -uroot -p${MYSQL_PWD}
 stat $?
 fi
