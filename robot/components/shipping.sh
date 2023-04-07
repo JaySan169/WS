@@ -22,6 +22,7 @@ mv target/shipping-1.0.jar shipping.jar &>> $LOGFILE
 stat $?
 
 echo -n "Copying the $COMPONENT files:"
+rm -rf /home/roboshop/*
 mv /home/roboshop/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service &>> $LOGFILE
 stat $?
 
