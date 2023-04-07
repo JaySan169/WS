@@ -9,7 +9,7 @@ cd /home/$APPUSER/$COMPONENT
 mvn clean package &>> $LOGFILE
 stat $?
 
-echo -n "Copying the $COMPONENT files:"
+echo -n "Moving the $COMPONENT files:"
 mv target/$COMPONENT-1.0.jar $COMPONENT.jar &>> $LOGFILE
 stat $?
 
