@@ -7,10 +7,11 @@ echo -n "Installing Maven:"
 yum install maven -y &>> $LOGFILE
 stat $?
 
+useradd roboshop
 
 echo -n "Configuring $COMPONENT repo:"
 cd /home/roboshop
-curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
+curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/shipping/archive/main.zip"
 unzip /tmp/$COMPONENT.zip &>> $LOGFILE
 mv $COMPONENT-main $COMPONENT
 cd $COMPONENT
