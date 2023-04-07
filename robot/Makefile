@@ -16,9 +16,6 @@ mysql:
 payment:
 	bash components/payment.sh;
 
-rabbitmq:
-	bash components/rabbitmq.sh;
-
 redis:
 	bash components/redis.sh;
 
@@ -27,3 +24,6 @@ user:
 
 shipping:
 	bash components/shipping.sh;
+
+rabbitmq:
+	bash components/rabbitmq.sh;
