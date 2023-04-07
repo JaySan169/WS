@@ -100,7 +100,6 @@ echo -n "Starting $COMPONENT service"
 systemctl daemon-reload
 systemctl start $COMPONENT
 systemctl enable $COMPONENT &>> $LOGFILE
-echo -n -e "\e[32m___________ $COMPONENT installation completed______________\e[0m"
 stat $?
 } 
 
