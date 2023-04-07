@@ -54,13 +54,6 @@ DOWNLOAD_AND_EXTRACT
 #configuring service
 CONFIGURE_SERVICE
 
-USERID=$(id -u roboshop)
-GROUPID=$(id -g roboshop)
-
-echo -n "Updating gid & Uid with $APPUSER in $COMPONENT.ini :"
-sed -i -e "/^uid/ c uid=$USERID"  -e "/^gid/ c gid=$GROUPID" /home/$APPUSER/$COMPONENT/$COMPONENT.ini
-stat $?
-
 }
 
 PYTHON() {
@@ -78,8 +71,14 @@ cd /home/$APPUSER/$COMPONENT
 pip3 install -r requirements.txt &>> $LOGFILE
 stat $?
 
-CONFIGURE_SERVICE
+USERID=$(id -u roboshop)
+GROUPID=$(id -g roboshop)
 
+echo -n "Updating gid & Uid with $APPUSER in $COMPONENT.ini :"
+sed -i -e "/^uid/ c uid=$USERID"  -e "/^gid/ c gid=$GROUPID" /home/$APPUSER/$COMPONENT/$COMPONENT.ini
+stat $?
+
+CONFIGURE_SERVICE
 
 
 }
