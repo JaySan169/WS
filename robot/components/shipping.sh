@@ -6,7 +6,7 @@ echo -n "Installing Maven:"
 yum install maven -y &>> $LOGFILE
 stat $?
 
-useradd roboshop
+CREATE_USER
 
 echo -n "Configuring $COMPONENT repo:"
 cd /home/roboshop
@@ -28,7 +28,7 @@ stat $?
 echo -n "Starting $COMPONENT service:"
 systemctl daemon-reload
 systemctl start $COMPONENT 
-systemctl enable $COMPONENT
+systemctl enable $COMPONENT &>> $LOGFILE
 stat $?
 
 echo -n -e "\e[32m___________ $COMPONENT installation completed______________\e[0m"
