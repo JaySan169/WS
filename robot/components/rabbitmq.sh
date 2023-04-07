@@ -19,9 +19,9 @@ systemctl start $COMPONENT-server
 stat $?
 
 echo -n "Configuring User and permissons:"
-$COMPONENTctl add_user roboshop roboshop123 &>> $LOGFILE
-$COMPONENTctl set_user_tags roboshop administrator &>> $LOGFILE
-$COMPONENTctl set_permissions -p / roboshop ".*" ".*" ".*"  &>> $LOGFILE
+rabbitmqctl add_user roboshop roboshop123 &>> $LOGFILE
+rabbitmqctl set_user_tags roboshop administrator &>> $LOGFILE
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"  &>> $LOGFILE
 stat $?
 
 
