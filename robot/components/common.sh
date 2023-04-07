@@ -1,5 +1,6 @@
 USERID=$(id -u)
 LOGFILE=/tmp/$COMPONENT.log
+APPUSER=roboshop
 
 if [ $USERID -ne 0 ] ; then
     echo -e "\e[31m be a root user or use sudo \e[0m"
@@ -51,6 +52,25 @@ CREATE_USER
 DOWNLOAD_AND_EXTRACT
 
 #configuring service
+CONFIGURE_SERVICE
+
+}
+
+PYTHON() {
+    
+echo -n "Installing Python for $COMPONENT service:"
+yum install python36 gcc python3-devel -y &>> $LOGFILE
+stat $?
+
+CREATE_USER
+
+DOWNLOAD_AND_EXTRACT
+
+echo -n "Installing $COMPONENT service:"
+cd /home/$APPUSER/$COMPONENT 
+pip3 install -r requirements.txt &>> $LOGFILE
+stat $?
+
 CONFIGURE_SERVICE
 
 }
