@@ -58,7 +58,7 @@ USERID=$(id -u roboshop)
 GROUPID=$(id -g roboshop)
 
 echo -n "Updating gid & Uid with $APPUSER in $COMPONENT.ini :"
-sed -i -e "/^uid/ c uid=$USERID"  -e "/^gid/ c gid=$GROUPID" &>> $LOGFILE
+sed -i -e "/^uid/ c uid=$USERID"  -e "/^gid/ c gid=$GROUPID"
 stat $?
 
 }
