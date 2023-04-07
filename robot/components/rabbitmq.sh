@@ -9,7 +9,7 @@ curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/sc
 stat $?
 
 
-echo -n "Starting $COMPONENT:"
+echo -n "installing $COMPONENT:"
 yum install rabbitmq-server -y &>> $LOGFILE
 stat $?
 
