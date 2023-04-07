@@ -3,7 +3,7 @@ set -e
 COMPONENT=shipping
 source components/common.sh
 
-echo -n "Installing $COMPONENT:"
+echo -n "Installing Maven:"
 yum install maven -y &>> $LOGFILE
 stat $?
 
