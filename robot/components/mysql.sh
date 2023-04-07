@@ -46,5 +46,3 @@ echo -n "Injecting the $COMPONENT Schema: "
 cd /tmp/$COMPONENT-main
 mysql -u root -pRoboshop@1 < shipping.sql &>> $LOGFILE
 stat $?
-
-echo -n -e "\e[32m___________ $COMPONENT installation completed______________\e[0m"

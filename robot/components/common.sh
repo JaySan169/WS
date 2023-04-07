@@ -38,6 +38,22 @@ CONFIGURE_SERVICE
 
 }
 
+MAVEN() {
+
+echo -n "Installing Maven:"
+yum install maven -y &>> $LOGFILE
+stat $?
+
+#calling function to create user
+CREATE_USER
+
+#Downloading the code 
+DOWNLOAD_AND_EXTRACT
+
+#configuring service
+CONFIGURE_SERVICE
+
+}
 
 CREATE_USER() {
 
@@ -88,7 +104,7 @@ stat $?
 } 
 
 
-
+echo -n -e "\e[32m___________ $COMPONENT installation completed______________\e[0m"
 
 
 
