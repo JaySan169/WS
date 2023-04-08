@@ -92,7 +92,7 @@ mvn clean package &>> $LOGFILE
 stat $?
 
 echo -n "Moving the $COMPONENT files:"
-mv target/shipping-1.0.jar shipping.jar &>> $LOGFILE
+mv target/shipping-1.0.jar shipping .jar &>> $LOGFILE
 stat $?
 }
 

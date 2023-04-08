@@ -29,5 +29,11 @@ echo -n "configuring server proxies :"
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
 stat $?
 
+for comp in catalogue user cart shipping payment; do
+echo -n "Configuring reverse proxy: "
+sed -i -e "/$comp/s/localhost/$comp.robot.internal/" /etc/nginx/default.d/roboshop.conf
+stat $?
+done 
+
 systemctl enable nginx &>> $LOGFILE
 systemctl start nginx
