@@ -27,6 +27,3 @@ shipping:
 
 rabbitmq:
 	bash components/rabbitmq.sh;
-
-enable:
-	bash components/enable.sh;
