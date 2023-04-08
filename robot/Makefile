@@ -29,4 +29,4 @@ rabbitmq:
 	bash components/rabbitmq.sh;
 
 enable:
-	bash components/rabbitmq.sh;
+	bash components/enable.sh;
