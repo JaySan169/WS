@@ -1,4 +1,5 @@
 #!/bin/bash/
+LOGFILE=/tmp/server.log
 
 if [ -z $1 ] ; then
 echo "enter service name: "
@@ -16,7 +17,7 @@ echo $COMPONENT
 
 create_server()
 {
-aws ec2 run-instances --image-id $AMI_ID --instance-type t2.micro --security-group-ids $SGID | jq
+aws ec2 run-instances --image-id $AMI_ID --instance-type t2.micro --security-group-ids $SGID | jq &>> $LOGFILE
 }
 
 if [ "$1" == "all" ] ; then
