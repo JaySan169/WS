@@ -23,7 +23,9 @@ if [ "$1" == "all" ] ; then
     for comp in frontend catalogue cart user shipping payment mongodb mysql rabbitmq redis; do 
         COMPONENT=$comp
         create_server
+        echo "Server Created...Successfully..."
     done 
 else 
         create_server 
+        echo "Server Created...Successfully..."
 fi 
