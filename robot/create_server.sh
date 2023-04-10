@@ -22,8 +22,8 @@ aws ec2 run-instances --image-id $AMI_ID --instance-type t2.micro --security-gro
 if [ "$1" == "all" ] ; then
     for comp in frontend catalogue cart user shipping payment mongodb mysql rabbitmq redis; do 
         COMPONENT=$comp
-        createServer
+        create_server
     done 
 else 
-        createServer 
+        create_server 
 fi 
