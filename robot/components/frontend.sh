@@ -1,39 +1,54 @@
-#!/bin/bash
-set -e
+#!/bin/bash 
+
+# set -e 
+
 COMPONENT=frontend
-source components/common.sh
+LOGFILE="/tmp/$COMPONENT.log"
 
-echo -n "installing nginx $COMPONENT :"
+# Validting whether the executed user is a root user or not 
+ID=$(id -u)
+
+if [ "$ID" -ne 0 ] ; then 
+    echo -e "\e[31m You should execute this script as a root user or with a sudo as prefix \e[0m" 
+    exit 1
+fi 
+
+stat() {
+    if [ $1 -eq 0 ] ; then 
+        echo -e "\e[32m Success \e[0m"
+    else 
+        echo -e "\e[31m Failure \e[0m"
+        exit 2
+    fi 
+}
+
+echo -n "Installing Ngnix : "
 yum install nginx -y &>> $LOGFILE
-stat $?
+stat $? 
 
-echo -n "downloading component :"
+echo -n "Downloading the $COMPONENT component :"
 curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
-stat $?
+stat $? 
 
-echo -n "performing cleanup"
-rm -rf /usr/share/nginx/html/* &>> $LOGFILE
-stat $?
-
+echo -n "Performing Cleanup of Old $COMPONENT Content :"
 cd /usr/share/nginx/html
+rm -rf *  &>> $LOGFILE
+stat $? 
 
-echo -n "unzipping component :"
-unzip /tmp/$COMPONENT.zip &>> $LOGFILE
-stat $?
-
+echo -n "Copying the downloaded $COMPONENT content: "
+unzip /tmp/$COMPONENT.zip  &>> $LOGFILE
 mv $COMPONENT-main/* .
-mv static/* . 
-rm -rf $COMPONENT-master README.md
-
-echo -n "configuring server proxies :"
+mv static/* .
+rm -rf $COMPONENT-main README.md
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
-stat $?
+stat $? 
 
-for comp in catalogue user cart shipping payment; do
-echo -n "Configuring reverse proxy: "
-sed -i -e "/$comp/s/localhost/$comp.robot.internal/" /etc/nginx/default.d/roboshop.conf
-stat $?
+for component in catalogue cart user shipping payment; do 
+    echo -n "Updating the proxy details in the reverse proxy file :"
+    sed -i "/$component/s/localhost/$component.roboshop.internal/" /etc/nginx/default.d/roboshop.conf
 done 
 
-systemctl enable nginx &>> $LOGFILE
-systemctl start nginx
+echo -n "Starting the service: "
+systemctl enable nginx  &>> $LOGFILE
+systemctl restart nginx &>> $LOGFILE
+stat $? 

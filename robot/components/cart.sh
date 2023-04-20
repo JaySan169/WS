@@ -1,10 +1,6 @@
-#!/bin/bash
+#!/bin/bash 
 
 COMPONENT=cart
-source components/common.sh
-APPUSER=roboshop
+source components/common.sh    # Source is going to load the file, so that you can call all of them as per your need
 
-NODEJS
-
-
-echo -n -e "\e[32m___________ $COMPONENT installation completed______________\e[0m"
+NODEJS                         # Calling NodeJS Function.

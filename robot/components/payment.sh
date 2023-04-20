@@ -1,6 +1,6 @@
-#!/bin/bash
-source components/common.sh
+#!/bin/bash 
+
 COMPONENT=payment
+source components/common.sh    # Source is going to load the file, so that you can call all of them as per your need
 
-
-PYTHON
+PYTHON                         # Calling NodeJS Function.
