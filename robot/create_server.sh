@@ -1,45 +1,35 @@
 #!/bin/bash 
-# This script creates the server and the DNS Record
 
-COMPONENT=$1 
-ENV=$2
-HOSTED_ZONE_ID="Z090521761DHPU3HXLNP"
-
-if [ -z "$COMPONENT" ] || [ -z "$ENV" ]; then 
-    echo -e "\e[31m Component name is required \n Sample Usage: \n\n\t\t bash launch-ec2.sh componentName envName  \e[0m"
-    exit 1
+if [ -z "$1" ]; then 
+    echo -e "\e[31m Component name is required \n example usage is: \n\t bash create-server.sh componentName \e[0m"   
+    exit 1 
 fi 
 
-# AMI_ID=$(aws ec2 describe-images  --filters "Name=name,Values=DevOps-LabImage-CentOS7" --region us-east-1 | jq .Images[].ImageId | sed -e 's/"//g')
-AMI_ID="ami-0e3aeafe193bbdd4a"
-SG_ID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=b52-allow-all --region us-east-1 | jq .SecurityGroups[].GroupId | sed -e 's/"//g')
+COMPONENT=$1
+ENV=$2
+ZONE_ID="Z00636481OT8FNJLH82AQ"
 
-echo -e "AMI ID Used to launch the instance is \e[32m $AMI_ID \e[0m "
-echo -e "Security Group ID Used to launch the instance is \e[32m  $SG_ID \e[0m"
+# AMI_ID="$(aws ec2 describe-images --region us-east-1 --filters "Name=name,Values=DevOps-LabImage-CentOS7" | jq '.Images[].ImageId' | sed -e 's/"//g')"
+AMI_ID="ami-0fa1ba08307b907ac"
+SGID="$(aws ec2 describe-security-groups   --filters Name=group-name,Values=b51-allow-all | jq '.SecurityGroups[].GroupId' | sed -e 's/"//g')"
+echo "AMI ID Used to launch instance is : $AMI_ID"
+echo "SG ID Used to launch instance is : $SGID"
+echo $COMPONENT
 
-launch_ec2() { 
+createServer() {
+    PRIVATE_IP=$(aws ec2 run-instances --image-id $AMI_ID --instance-type t3.micro --security-group-ids $SGID  --instance-market-options "MarketType=spot, SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}"  --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}-${ENV}}]"| jq '.Instances[].PrivateIpAddress' | sed -e 's/"//g')
 
-    echo "______ $COMPONENT launch is in progress ______"
+    sed -e "s/IPADDRESS/${PRIVATE_IP}/" -e "s/COMPONENT/$COMPONENT-${ENV}/" route53.json > /tmp/dns.json 
 
-    PRIVATE_IP=$(aws ec2 run-instances --image-id ${AMI_ID} --instance-type t3.micro  --security-group-ids ${SG_ID} --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}-${ENV}}]" | jq '.Instances[].PrivateIpAddress' | sed -e 's/"//g')
-
-    echo -e "Private_ip of the $COMPONENT-${ENV} Server is \e[32m $PRIVATE_IP \e[0m"
-
-    echo -n "Creating Internal DNS Record for $COMPONENT-${ENV}" 
-
-    sed -e "s/IPADDRESS/$PRIVATE_IP/" -e "s/COMPONENT/$COMPONENT-${ENV}/" route53.json  > /tmp/r53.json 
-    aws route53 change-resource-record-sets --hosted-zone-id $HOSTED_ZONE_ID --change-batch file:///tmp/r53.json 
-
-    echo -n "______ Internal DNS Record for $COMPONENT-${ENV} is completed __________"  
-
+    echo -n "Creating the DNS Record ********"
+    aws route53 change-resource-record-sets --hosted-zone-id $ZONE_ID --change-batch file:///tmp/dns.json | jq 
 }
 
-# If the selected option to launch is all, it's going to create all the servers.
 if [ "$1" == "all" ]; then 
-    for component in frontend catalogue cart user shipping payment mysql rabbitmq redis mongodb; do 
+    for component in frontend catalogue cart user shipping payment mongodb mysql rabbitmq redis; do 
         COMPONENT=$component
-        launch_ec2                  # Calling Create Server Function
+        createServer
     done 
 else 
-        launch_ec2                  # Calling Create Server Function
+        createServer 
 fi 
