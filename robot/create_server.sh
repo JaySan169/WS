@@ -8,7 +8,7 @@ fi
 COMPONENT=$1
 ZONE_ID="Z044318916WL2NSIWQC4A"
 
-# AMI_ID="$(aws ec2 describe-images --region us-east-1 --filters "Name=name,Values=DevOps-LabImage-CentOS7" | jq '.Images[].ImageId' | sed -e 's/"//g')"
+#AMI_ID="$(aws ec2 describe-images --region us-east-1 --filters "Name=name,Values=DevOps-LabImage-CentOS7" | jq '.Images[].ImageId' | sed -e 's/"//g')"
 AMI_ID="ami-0fa1ba08307b907ac"
 SGID="$(aws ec2 describe-security-groups   --filters Name=group-name,Values=sg3 | jq '.SecurityGroups[].GroupId' | sed -e 's/"//g')"
 echo "AMI ID Used to launch instance is : $AMI_ID"
