@@ -2,6 +2,8 @@
   hosts: all
   vars:
      URL: play.google.com
+  vars_files:
+    - demovars.yml
   tasks:
      - name: printing the URL
        ansible.builtin.debug:
@@ -16,3 +18,9 @@
           msg: "{{URL}}"  
        vars:
           URL: play.facebook.com
+
+     - name: printing the URL with quotes
+       ansible.builtin.debug:
+          msg: "{{CLI_URL}}" 
+       vars:
+          CLI_URL: TASK_CLI.facebook.com 
