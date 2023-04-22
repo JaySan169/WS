@@ -1,9 +1,7 @@
-- name: Demo on COpy
-  hosts: all
-  tasks:
-    - name: copying hosts
-      ansible.builtin.get_url:
-        url: https://github.com/b51-clouddevops/ansible/blob/main/10-demo-on-copy.yml
-        dest: /tmp/hosts
-        mode: '0440'
-        force_basic_auth: yes
+- name: Demo on copy 
+  hosts: all 
+  tasks : 
+    - name: Copy file to destination 
+      ansible.builtin.copy:
+        src: inv 
+        dest: /home/centos/hosts
