@@ -15,4 +15,4 @@
 
     - name: UNFINED
       ansible.builtin.shell: echo "i am UNDEFINED"
-      when: variable is unfined   
+      when: variable is undefined   
