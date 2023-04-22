@@ -1,8 +1,7 @@
 - name: Demo on COpy
-  hosts: dev
+  hosts: all
   tasks:
     - name: copying hosts
       ansible.builtin.get_url:
         url: https://github.com/b51-clouddevops/ansible/blob/main/10-demo-on-copy.yml
-        dest: /tmp/hosts
-        mode: '0440'
+        dest: /tmp/hosts/new.html
