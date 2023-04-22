@@ -5,3 +5,8 @@
       ansible.builtin.copy:
         src: inv 
         dest: /home/centos/hosts
+
+    - name: Copy online content to destination 
+      ansible.builtin.get_url:
+        url: https://github.com/b51-clouddevops/ansible/blob/main/10-demo-on-copy.yml 
+        dest: /home/centos/hosts
