@@ -4,15 +4,15 @@
     response: true
     variable: DEFINED
   
-  - name: am i Centos?
-    ansible.builtin.debug:
+- name: am i Centos?
+  ansible.builtin.debug:
       msg: hi im Centos
-    when: response
+  when: response
 
-  - name: DEFINED
-    ansible.builtin.shell: echo "i am {{variable}}"
-    when: variable is defined   
+- name: DEFINED
+  ansible.builtin.shell: echo "i am {{variable}}"
+  when: variable is defined   
 
-  - name: UNFINED
-    ansible.builtin.shell: echo "i am UNDEFINED"
-    when: variable is unfined   
+- name: UNFINED
+  ansible.builtin.shell: echo "i am UNDEFINED"
+  when: variable is unfined   
