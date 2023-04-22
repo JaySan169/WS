@@ -3,7 +3,7 @@
   tasks:
    - name: Print List
      ansible.builtin.debug:
-        msg: printing list "{{item}}
+        msg: printing list {{item}}
      loop:
       - A
       - B
