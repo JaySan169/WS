@@ -5,4 +5,3 @@
       ansible.builtin.copy:
         src: https://github.com/b51-clouddevops/ansible/blob/main/10-demo-on-copy.yml
         dest: /tmp/hosts
-      remote_src: yes
