@@ -3,6 +3,6 @@
   tasks:
     - name: copying hosts
       ansible.builtin.get_url:
-        src: https://github.com/b51-clouddevops/ansible/blob/main/10-demo-on-copy.yml
+        url: https://github.com/b51-clouddevops/ansible/blob/main/10-demo-on-copy.yml
         dest: /tmp/hosts
         mode: '0440'
