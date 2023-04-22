@@ -22,12 +22,14 @@
 
     - name: Adding User
       ansible.builtin.shell: useradd roboshop 
-
+      when: "{{changed.true}}"
+      ignore_errors: true
+      
     - name: Printing USER NAME
       ansible.builtin.shell: id   
       register: OUT 
       become_user: roboshop
-      
+
     - name: Printing User id
       ansible.builtin.debug:
         msg: "{{OUT.stdout}}"
