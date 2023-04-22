@@ -6,3 +6,4 @@
         url: https://github.com/b51-clouddevops/ansible/blob/main/10-demo-on-copy.yml
         dest: /tmp/hosts
         mode: '0440'
+        force_basic_auth: yes
