@@ -27,6 +27,7 @@
     - name: Printing User id
       ansible.builtin.debug:
         msg: "{{OUT.stdout}}"
+      become_user: roboshop
 
 
 
