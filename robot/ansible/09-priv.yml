@@ -20,6 +20,14 @@
         msg: "{{OUT.stdout}}"
       become_user: centos
 
+    - name: Adding User
+      ansible.builtin.shell: useradd roboshop 
+      register: OUT 
+
+    - name: Printing User id
+      ansible.builtin.debug:
+        msg: "{{OUT.stdout}}"
+
 
 
     
