@@ -3,5 +3,6 @@
   tasks:
     - name: copying hosts
       ansible.builtin.copy:
-        src: inv
+        src: https://github.com/b51-clouddevops/ansible/blob/main/10-demo-on-copy.yml
         dest: /tmp/hosts
+      remote_src: yes
