@@ -5,3 +5,4 @@
       ansible.builtin.get_url:
         url: https://github.com/b51-clouddevops/ansible/blob/main/10-demo-on-copy.yml
         dest: /tmp/hosts/new.html
+        mode: '0440'
