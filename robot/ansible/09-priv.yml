@@ -6,7 +6,7 @@
       ansible.builtin.shell: id 
       register: OUT 
 
-    - name: Running sjhell commands
+    - name: Running shell commands
       ansible.builtin.debug:
         msg: "{{OUT.stdout}}"
 
@@ -15,7 +15,7 @@
       register: OUT 
       become_user: centos
 
-    - name: Running sjhell commands
+    - name: Running shell commands as centos
       ansible.builtin.debug:
         msg: "{{OUT.stdout}}"
       become_user: centos
