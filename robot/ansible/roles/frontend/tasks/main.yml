@@ -6,7 +6,7 @@
 - name: Download & Extract Frontend
   ansible.builtin.unarchive:
     src: https://github.com/stans-robot-project/frontend/archive/main.zip
-    dest: temp 
+    dest: /temp 
     remote_source: yes
 
 - name: cleanup of old content
