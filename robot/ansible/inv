@@ -1,5 +1,8 @@
-[dev]
-172.31.82.150
+[frontend]
+frontend.robot.internal
 
-[prod]
-172.31.95.120
+[catalogue]
+catalogue.robot.internal
+
+[mongodb]
+mongodb.robot.internal
