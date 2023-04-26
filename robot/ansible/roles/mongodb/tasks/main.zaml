@@ -1,0 +1,41 @@
+- name: Copying MongoDB Repo 
+  ansible.builtin.copy:
+    src: mongo.repo
+    destL: /etc/yum.repos.d/mongodb.repo
+
+- name: Installing MongoDB
+  ansible.builtin.yum:
+    name: mongodb-org
+    state: installed
+
+- name: Update MonngDB conf 
+  ansible.builtin.replace:
+    path: /etc/mongod.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+- name: Restaring Nginx
+  ansible.builtin.service:
+    name: mongod 
+    state: started
+    enabled: yes 
+
+- name: Download and extract frontend 
+  ansible.builtin.unarchive:
+    src: https://github.com/stans-robot-project/mongodb/archive/main.zip
+    dest: /tmp 
+    remote_src: yes
+
+- name: Load Catalogue Schema
+  community.mongodb.mongodb_shell:
+    file: "/tmp/mongodb-main/catalogue.js"
+    idempotent: yes
+
+- name: Load Users Schema
+  community.mongodb.mongodb_shell:
+    file: "/tmp/mongodb-main/users.js"
+    idempotent: yes
+
+- name: Run the listDatabases command
+  community.mongodb.mongodb_shell:
+    eval: "db.adminCommand('listDatabases')"
