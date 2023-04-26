@@ -33,4 +33,7 @@
     - catalogue
     - users
 
+- name: set hostname
+  ansible.builtin.yum: set-hostname {{COMPONENT}}
+
 
