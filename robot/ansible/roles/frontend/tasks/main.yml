@@ -36,6 +36,7 @@
     state: restarted
     daemon_reload: true 
     name: nginx 
+    enabled: yes 
 
 - name: set hostname
   ansible.builtin.yum: set-hostname {{COMPONENT}}
