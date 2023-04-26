@@ -30,4 +30,10 @@
     dest: /home/roboshop/{{COMPONENT}}/
     remote_src: yes
   become_user: yes 
+
+- name: Installing NodeJs Package 
+  community.general.npm:
+    path: /home/roboshop/{{COMPONENT}}
+
+
   
