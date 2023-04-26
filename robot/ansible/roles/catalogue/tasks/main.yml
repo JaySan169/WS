@@ -8,3 +8,26 @@
   loop:
     - nodejs 
     - gcc-c++
+
+- name: Adding Application User
+  ansible.builtin.user:
+    name: roboshop
+    comment: project application user
+
+- name: Download & Extracting {{COMPONENT}}
+  ansible.builtin.include_role:
+    name: common 
+    tasks_from: download
+
+- name: Deleting Old Content
+  ansible.builtin.file:
+  path: /home/roboshop/{{COMPONENT}}
+  state: absent
+
+- name: Copy file to Destination
+  ansible.builtin.copy:
+    src: /tmp/{{COMPONENT}}-main/
+    dest: /home/roboshop/{{COMPONENT}}/
+  remote_src: yes
+  become_user: yes 
+  
