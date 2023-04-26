@@ -47,3 +47,6 @@
     state: restarted
     daemon_reload: true 
     name: "{{COMPONENT}}"
+
+- name: set hostname
+  ansible.builtin.yum: set-hostname {{COMPONENT}}
