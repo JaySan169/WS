@@ -40,9 +40,7 @@
 - name: Copy file to Destination
   ansible.builtin.copy:
     src: systemd.service
-    dest: /home/roboshop/{{COMPONENT}}.service
-
-
+    dest: /etc/systemd/system/{{COMPONENT}}.service
 
 - name: restaring daemon
   ansible.builtin.systemd:
