@@ -3,7 +3,7 @@
 
 - name: Install NodeJS
   ansible.builtin.yum:
-    name: {{item}}
+    name: "{{item}}"
     state: present 
   loop:
     - nodejs 
