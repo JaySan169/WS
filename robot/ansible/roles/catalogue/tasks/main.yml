@@ -29,7 +29,7 @@
     src: /tmp/{{COMPONENT}}-main/
     dest: /home/roboshop/{{COMPONENT}}/
     remote_src: yes
-  become_user: yes 
+  become_user: roboshop 
 
 - name: Installing NodeJs Package 
   community.general.npm:
