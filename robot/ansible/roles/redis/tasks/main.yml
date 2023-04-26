@@ -20,7 +20,5 @@
     name: redis 
     enabled: yes 
 
-- name: Doing set-hostname 
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: set-hostname
+- name: set hostname
+  ansible.builtin.yum: set-hostname {{COMPONENT}}
