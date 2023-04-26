@@ -15,10 +15,10 @@
     replace: '0.0.0.0'
 
 - name: Restarting Service 
-  ansible.builtin.systemd:
-    state: restarted
-    daemon_reload: true 
-    name: "{{COMPONENT}}"
-
+  ansible.builtin.service:
+    state: started
+    name: redis 
+    enabled: yes 
+    
 - name: set hostname
   ansible.builtin.yum: set-hostname {{COMPONENT}}
