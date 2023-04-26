@@ -26,14 +26,19 @@
 
 - name: Copy file to Destination
   ansible.builtin.copy:
-    src: /tmp/{{COMPONENT}}-main/
-    dest: /home/roboshop/{{COMPONENT}}/
-    remote_src: yes
-  become_user: roboshop 
+    src: system.service
+    dest: /home/roboshop/{{COMPONENT}}.service
 
 - name: Installing NodeJs Package 
   community.general.npm:
     path: /home/roboshop/{{COMPONENT}}
+
+
+- name: restaring daemon
+  ansible.builtin.systemd:
+    state: restarted
+    daemon_reload: true
+    name: "{{COMPONENT}}"
 
 
   
