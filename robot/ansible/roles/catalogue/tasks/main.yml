@@ -1,52 +1,49 @@
-- name: Configuring the yum repos 
-  ansible.builtin.shell: curl --silent --location https://rpm.nodesource.com/setup_16.x | bash - 
+- name: Configure yum repo
+  ansible.builtin.shell: curl --silent --location https://rpm.nodesource.com/setup_16.x | bash
 
-- name: Install NodeJS
-  ansible.builtin.yum:
+- name: Installing NodeJS 
+  ansible.builtin.package:
     name: "{{item}}"
-    state: present 
+    state: present
   loop:
-    - nodejs 
-    - gcc-c++
+      - nodejs
+      - gcc-c++
 
-- name: Adding Application User
+- name: Add the user
   ansible.builtin.user:
     name: roboshop
-    comment: project application user
+    comment: roboshop project app user
 
-- name: Download & Extracting {{COMPONENT}}
+
+- name: Download and extract
   ansible.builtin.include_role:
-    name: common 
+    name: common
     tasks_from: download
 
-- name: Deleting Old Content
+- name: Cleanup old content
   ansible.builtin.file:
     path: /home/roboshop/{{COMPONENT}}
     state: absent
 
-- name: COpy file
+- name: copy file to destination 
   ansible.builtin.copy:
     src: /tmp/{{COMPONENT}}-main/
     dest: /home/roboshop/{{COMPONENT}}
-    remote_src: yes 
+    remote_src: yes
   become_user: roboshop
 
-
-- name: Installing NodeJs Package 
+- name: Installing node.js package.
   community.general.npm:
     path: /home/roboshop/{{COMPONENT}}
 
 
-- name: Copy file to Destination
+- name: Copy file from Destination 
   ansible.builtin.copy:
     src: systemd.service
     dest: /etc/systemd/system/{{COMPONENT}}.service
 
-- name: restaring daemon
+- name: Restarting Service 
   ansible.builtin.systemd:
     state: restarted
-    daemon_reload: true
+    daemon_reload: true 
     name: "{{COMPONENT}}"
-
-
-  
