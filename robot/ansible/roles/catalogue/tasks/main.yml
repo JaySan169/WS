@@ -25,7 +25,7 @@
     state: absent
 
 - name: COpy file
-  ansible.builtin.file:
+  ansible.builtin.copy:
     src: /tmp/{{COMPONENT}}-main/
     path: /home/roboshop/{{COMPONENT}}
     remote_src: yes 
