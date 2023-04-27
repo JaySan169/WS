@@ -40,10 +40,10 @@
         register: DEF_ROOT_PASSWORD
 
 - name: Checking Plugins 
-  ansible.builtin.shell: echo show plugins; | mysql -uroot -pRoboshop@1 | grep validate_password
+  ansible.builtin.shell: echo show plugins; | mysql -uroot -pRoboShop@1 | grep validate_password
   register: PLUGIN_INFO
   ignore_errors: true
-  
+
 - name: msg 
   debug:
     msg: "{{PLUGIN_INFO}}"
