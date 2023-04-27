@@ -10,8 +10,8 @@ mongodb.robot.internal
 [redis]
 redis.robot.internal
 
-[frontend]
-frontend.robot.internal
+[mysql]
+mysql.robot.internal
 
 [user]
 user.robot.internal
