@@ -1,3 +1,8 @@
+- name: Setting Host Name
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: sethost 
+    
 - name: Copying MongoDB Repo 
   ansible.builtin.copy:
     src: mongo.repo
@@ -32,8 +37,4 @@
   loop:
     - catalogue
     - users
-
-- name: set hostname
-  ansible.builtin.yum: set-hostname {{COMPONENT}}
-
 

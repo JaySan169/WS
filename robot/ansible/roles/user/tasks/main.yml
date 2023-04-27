@@ -1,3 +1,8 @@
+- name: Setting Host Name
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: sethost 
+
 - name: Configure yum repo
   ansible.builtin.shell: curl --silent --location https://rpm.nodesource.com/setup_16.x | bash
 
@@ -48,6 +53,3 @@
     daemon_reload: true 
     name: "{{COMPONENT}}"
     enabled: yes 
-
-- name: set hostname
-  ansible.builtin.shell: set-hostname {{COMPONENT}}

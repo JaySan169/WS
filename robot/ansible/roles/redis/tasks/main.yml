@@ -1,3 +1,8 @@
+- name: Setting Host Name
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: sethost 
+
 - name: Copying {{COMPONENT}} repo 
   ansible.builtin.copy:
      src: "{{COMPONENT}}.repo"
@@ -19,6 +24,3 @@
     state: started
     name: "{{COMPONENT}}"
     enabled: yes 
-
-- name: set hostname
-  ansible.builtin.yum: set-hostname {{COMPONENT}}

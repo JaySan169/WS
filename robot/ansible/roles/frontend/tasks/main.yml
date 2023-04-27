@@ -1,3 +1,8 @@
+- name: Setting Host Name
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: sethost 
+    
 - name: Installing nginx 
   ansible.builtin.package:
     name: nginx 
@@ -24,13 +29,6 @@
     src: roboshop.conf
     dest: /etc/nginx/default.d/roboshop.conf
 
-# - name: Start nginx
-#   ansible.builtin.service:
-#     name: nginx
-#     state: started         
-#     enabled: yes
-
-
 - name: Restarting Service 
   ansible.builtin.systemd:
     state: restarted
@@ -38,5 +36,3 @@
     name: nginx 
     enabled: yes 
 
-- name: set hostname
-  ansible.builtin.yum: set-hostname {{COMPONENT}}
