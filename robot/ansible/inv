@@ -22,8 +22,8 @@ cart.robot.internal
 [shipping]
 shipping.robot.internal
 
-[rabittmq]
-rabittmq.robot.internal
+[rabbitmq]
+rabbitmq.robot.internal
 
 [payment]
 payment.robot.internal
