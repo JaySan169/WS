@@ -39,11 +39,19 @@
         ansible.builtin.shell: mysql --connect-expired-password -uroot -p"{{DEF_ROOT_PASSWORD.stdout}}" < /tmp/rootpass.sql
         register: DEF_ROOT_PASSWORD
 
-- name: Checking Plugins 
+- name: Checking password validate Plugins 
   ansible.builtin.shell: echo show plugins; | mysql -uroot -pRoboShop@1 | grep validate_password
   register: PLUGIN_INFO
   ignore_errors: true
 
-- name: msg 
-  debug:
-    msg: "{{PLUGIN_INFO}}"
+
+- name: Reset Password
+  when: PLUGIN_INFO.rc==0
+  block:
+      - name: Copying the command 
+        ansible.builtin.copy:
+          src: validatepass
+          dest: /tmp/validatepass
+
+      - name: Removing password validate Plugins 
+        ansible.builtin.shell: mysql --connect-expired-password -uroot -pRoboShop@1 < /tmp/validatepass
