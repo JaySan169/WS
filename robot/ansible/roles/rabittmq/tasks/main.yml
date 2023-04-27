@@ -4,15 +4,17 @@
 - name: Installing rabittmq 
   ansible.builtin.yum:
      name: 
-        - https://packagecloud.io/install/repositories/rabittmq/erlang/script.rpm.sh
+        - https://packagecloud.io/install/repositories/rabittmq-server/script.rpm.sh
         - rabittmq-server
      state: installed 
+  ignore_errors: true
 
 - name: Restarting Service 
   ansible.builtin.systemd:
     state: started
     name: rabittmq-server
     enabled: yes 
+  ignore_errors: true
 
 - name: Adding Rabittmq User
   community.rabbitmq.rabbitmq_user:
