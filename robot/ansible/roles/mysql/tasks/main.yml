@@ -45,7 +45,7 @@
   ignore_errors: true
 
 - name: Reset Password
-  # when: PLUGIN_INFO.rc == 0
+  when: PLUGIN_INFO.rc == 0
   block:
       - name: Copying the command 
         ansible.builtin.copy:
