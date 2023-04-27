@@ -7,14 +7,14 @@
         - https://packagecloud.io/install/repositories/rabittmq-server/script.rpm.sh
         - rabittmq-server
      state: installed 
-  ignore_errors: true
+  ignore_errors: yes
 
 - name: Restarting Service 
   ansible.builtin.systemd:
     state: started
     name: rabittmq-server
     enabled: yes 
-  ignore_errors: true
+  ignore_errors: yes
 
 - name: Adding Rabittmq User
   community.rabbitmq.rabbitmq_user:
