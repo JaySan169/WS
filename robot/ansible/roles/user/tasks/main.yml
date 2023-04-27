@@ -50,4 +50,4 @@
     enabled: yes 
 
 - name: set hostname
-  ansible.builtin.yum: set-hostname {{COMPONENT}}
+  ansible.builtin.shell: set-hostname {{COMPONENT}}
