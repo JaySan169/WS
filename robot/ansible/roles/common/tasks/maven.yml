@@ -30,3 +30,8 @@
   args:
     chdir: /home/roboshop/{{COMPONENT}}
   become_user: roboshop
+
+- name: Configuring Service 
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: config-service 
