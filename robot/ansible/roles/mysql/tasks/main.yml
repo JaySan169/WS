@@ -54,3 +54,16 @@
 
       - name: Removing password validate Plugins 
         ansible.builtin.shell: mysql --connect-expired-password -uroot -pRoboShop@1 < /tmp/validatepass.store
+
+- name: Download and extract
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
+
+- name: load schema 
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    target: /tmp/mysql-mail/shipping.mysql
+    login_user: root
+    login_password: RoboShop@1
