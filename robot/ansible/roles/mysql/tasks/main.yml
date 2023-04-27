@@ -49,11 +49,11 @@
   block:
       - name: Copying the command 
         ansible.builtin.copy:
-          src: validatepass.cmd
-          dest: /tmp/validatepass.cmd
+          src: validatepass.mysql
+          dest: /tmp/validatepass.mysql
 
       - name: Removing password validate Plugins 
-        ansible.builtin.shell: mysql --connect-expired-password -uroot -pRoboShop@1 < /tmp/validatepass.cmd
+        ansible.builtin.shell: mysql --connect-expired-password -uroot -pRoboShop@1 < /tmp/validatepass.mysql 
 
 - name: Download and extract
   ansible.builtin.include_role:
