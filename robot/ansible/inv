@@ -9,3 +9,21 @@ mongodb.robot.internal
 
 [redis]
 redis.robot.internal
+
+[frontend]
+frontend.robot.internal
+
+[user]
+user.robot.internal
+
+[cart]
+cart.robot.internal
+
+[shipping]
+shipping.robot.internal
+
+[rabittmq]
+rabittmq.robot.internal
+
+[payment]
+payment.robot.internal
