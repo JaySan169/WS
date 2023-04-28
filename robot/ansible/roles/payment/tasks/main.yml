@@ -39,9 +39,11 @@
     chdir: /home/roboshop/{{COMPONENT}}
   become_user: roboshop
 
-
-
-
+- name: Update the roboshop user and group id in payment.ini file.
+  ansible.builtin.shell: 
+    USERID=$(id -u roboshop)
+    GROUPID=$(id -g roboshop)
+    sed -i -e "/^uid/ c uid=${USERID}" -e "/^gid/ c gid=${GROUPID}"  /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
 
 - name: Configuring Service 
   ansible.builtin.include_role:
