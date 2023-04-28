@@ -48,7 +48,7 @@
   ansible.builtin.lineinfile:
     path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
     regexp: ^gid
-    line: gid = {{APP_USER_INFO.gid}} 
+    line: gid = {{APP_USER_INFO.group}} 
 
 - name: Configuring Service 
   ansible.builtin.include_role:
