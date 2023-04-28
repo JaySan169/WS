@@ -1,12 +1,12 @@
 - name: Configuring repos
   ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash
 
-- name: Installing rabittmq 
-  ansible.builtin.yum:
-     name: 
-        - https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
+- name: Configuring repos
+  ansible.builtin.yum: 
+      name:
+        - curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash
         - rabbitmq-server
-     state: installed 
+      state: installed 
 
 - name: Restarting Service 
   ansible.builtin.systemd:
@@ -14,7 +14,7 @@
     name: rabbitmq-server
     enabled: yes 
 
-- name: Adding Rabittmq User
+- name: Adding Rabbitmq User
   community.rabbitmq.rabbitmq_user:
     user: roboshop
     password: roboshop123
