@@ -2,10 +2,11 @@
   ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash
 
 - name: Configuring repos
+  ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash
+
+- name: Configuring repos
   ansible.builtin.package: 
-      name:
-        - curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash
-        - rabbitmq-server
+      name: rabbitmq-server
       state: installed 
 
 - name: Restarting Service 
