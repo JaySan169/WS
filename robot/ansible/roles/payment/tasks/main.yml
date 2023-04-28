@@ -33,17 +33,22 @@
     remote_src: yes
   become_user: roboshop
 
-- name: Creating a package 
-  ansible.builtin.shell: pip3 install -r requirements.txt
-  args:
-    chdir: /home/roboshop/{{COMPONENT}}
-  become_user: roboshop
+- name: installing dependencies 
+  ansible.builtin.pip: 
+      requirements: /home/roboshop/{{COMPONENT}}/requirements.txt
+      executable: pip3
 
-- name: Update the roboshop user and group id in payment.ini file.
-  ansible.builtin.shell: 
-    USERID=$(id -u roboshop)
-    GROUPID=$(id -g roboshop)
-    sed -i -e "/^uid/ c uid=${USERID}" -e "/^gid/ c gid=${GROUPID}"  /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
+- name: updating User Id
+  ansible.builtin.lineinfile:
+    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
+    regexp: ^uid
+    line: uid = {{APP_USER_INFO.uid}}     
+
+- name: updating Group Id
+  ansible.builtin.lineinfile:
+    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
+    regexp: ^gid
+    line: gid = {{APP_USER_INFO.gid}} 
 
 - name: Configuring Service 
   ansible.builtin.include_role:
