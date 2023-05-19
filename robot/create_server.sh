@@ -15,7 +15,7 @@ AMI_ID="$(aws ec2 describe-images --region us-east-1 --filters "Name=name,Values
 SGID="$(aws ec2 describe-security-groups   --filters Name=group-name,Values=sg3 | jq '.SecurityGroups[].GroupId' | sed -e 's/"//g')"
 echo "AMI ID Used to launch instance is : $AMI_ID"
 echo "SG ID Used to launch instance is : $SGID"
-echo $COMPONENT
+echo "$COMPONENT-${ENV}"
 
 createServer() {
     PRIVATE_IP=$(aws ec2 run-instances --image-id $AMI_ID --instance-type t2.micro --security-group-ids $SGID --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}-${ENV}}]"| jq '.Instances[].PrivateIpAddress' | sed -e 's/"//g')
