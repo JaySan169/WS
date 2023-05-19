@@ -6,6 +6,7 @@ if [ -z "$1" ]; then
 fi 
 
 COMPONENT=$1
+ENV=$2
 ZONE_ID="Z044318916WL2NSIWQC4A"
 #AMI_ID="ami-0c1d144c8fdd8d690"
 #SGID="sg-09c4f9587ca8ec0f1"
@@ -17,9 +18,9 @@ echo "SG ID Used to launch instance is : $SGID"
 echo $COMPONENT
 
 createServer() {
-    PRIVATE_IP=$(aws ec2 run-instances --image-id $AMI_ID --instance-type t2.micro --security-group-ids $SGID --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}}]"| jq '.Instances[].PrivateIpAddress' | sed -e 's/"//g')
+    PRIVATE_IP=$(aws ec2 run-instances --image-id $AMI_ID --instance-type t2.micro --security-group-ids $SGID --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${COMPONENT}-${ENV}}]"| jq '.Instances[].PrivateIpAddress' | sed -e 's/"//g')
 
-    sed -e "s/IPADDRESS/${PRIVATE_IP}/" -e "s/COMPONENT/$COMPONENT/" route53.json > /tmp/dns.json 
+    sed -e "s/IPADDRESS/${PRIVATE_IP}/" -e "s/COMPONENT/$COMPONENT-${ENV}/" route53.json > /tmp/dns.json 
 
     echo -n "Creating the DNS Record ********"
     aws route53 change-resource-record-sets --hosted-zone-id $ZONE_ID --change-batch file:///tmp/dns.json | jq 
