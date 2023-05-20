@@ -58,5 +58,3 @@
             region: us-east-1
 
 # Ansible is not a right tool for provisioning infrastructure. Terraform is the right way to provision the infrastructure
-
-#new notice
