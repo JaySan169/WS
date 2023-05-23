@@ -29,7 +29,8 @@ pipeline {
             steps {
                     sh "env"
                     sh "echo Running it against TAG $TAG_NAME"
-                    sh "well done --- tag given "
+                    sh "updated..."
+
                 }
             }
         }    
