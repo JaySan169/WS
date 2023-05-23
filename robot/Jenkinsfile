@@ -1,37 +1,39 @@
 pipeline {
-    agent any    
+    agent any
+    options {
+        ansiColor('xterm')
+    }
     environment {
-        ENV_URL       = "pipeline.google.com"
-        SSH_CRED      = credentials('SSH')
+        SSH_CRED = credentials('SSH-CRED')
     }
-
+    tools {
+            maven 'maven-3.5.0' 
+        }
     stages {
-        stage('Perform Lint Checks') {    // Runs only when it's a feature branch 
-        // when { branch pattern: "feature-.*", comparator: "REGEXP"} 
+        stage('Performing Lint Checks') {
+            when { branch pattern: "feature.*", comparator: "REGEXP"}
             steps {
                 sh "env"
-                sh "echo Performing Link Checks"           
+                sh "echo This stage should only run against the feature branch only"
+                sh "echo LINT CHECKS COMPLETED"
             }
         }
+        
+        stage('Performing Ansible Dryrun') {
+            when { branch pattern: "PR-.*", comparator: "REGEXP"}
+                steps {
+                   sh "env"
+                   sh "echo This stage should run only from the PR"
+                   sh "ansible-playbook robot-dryrun.yml -e COMPONENT=mongodb -e ENV=dev -e ansible_user=${SSH_CRED_USR} -e ansible_password=${SSH_CRED_PSW}"
+                }
+            }
 
-        stage('Do a Dry-Run') {  
-            // when { branch pattern: "PR-.*", comparator: "REGEXP"}           // Runs only when it's a PR 
+        stage('Testing The Release with tag') {
+            when { expression { env.TAG_NAME != null } }
             steps {
-                sh "env"
-                sh "ansible-playbook robot-dryrun.yml -e COMPONENT=mongodb -e ENV=dev -e ansible_user=${SSH_CRED_USR} -e ansible_password=${SSH_CRED_PSW}"           
+                    sh "env"
+                    sh "echo Running it against TAG $TAG_NAME"
+                }
             }
-        }
-
-        stage('TAG') {   
-            // when { 
-            //     expression { env.TAG_NAME != null }        // Checking whether the value of TAG_NAME is null or not
-            //     }    
-            steps {
-                sh "echo I am running against a TAG"                
-            }
-        }
+        }    
     }
-}
-
-
-// TAG_NAME variable only comes up when you run against the TAG_NAME, rest of the times, it won't be there. 
