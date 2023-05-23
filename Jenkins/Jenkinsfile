@@ -11,6 +11,7 @@ pipeline {
                 sh "env"
                 sh "echo This stage should only run against the feature branch only"
                 sh "echo LINT CHECKS COMPLETED"
+                sh "finished"
             }
         }
         
