@@ -1,17 +1,12 @@
 pipeline {
     agent any
-    options {
-        ansiColor('xterm')
-    }
     environment {
         SSH_CRED = credentials('SSH-CRED')
     }
-    tools {
-            maven 'maven-3.5.0' 
-        }
+
     stages {
         stage('Performing Lint Checks') {
-            when { branch pattern: "feature.*", comparator: "REGEXP"}
+            // when { branch pattern: "feature.*", comparator: "REGEXP"}
             steps {
                 sh "env"
                 sh "echo This stage should only run against the feature branch only"
@@ -20,7 +15,7 @@ pipeline {
         }
         
         stage('Performing Ansible Dryrun') {
-            when { branch pattern: "PR-.*", comparator: "REGEXP"}
+            // when { branch pattern: "PR-.*", comparator: "REGEXP"}
                 steps {
                    sh "env"
                    sh "echo This stage should run only from the PR"
@@ -29,7 +24,7 @@ pipeline {
             }
 
         stage('Testing The Release with tag') {
-            when { expression { env.TAG_NAME != null } }
+            // when { expression { env.TAG_NAME != null } }
             steps {
                     sh "env"
                     sh "echo Running it against TAG $TAG_NAME"
