@@ -19,6 +19,7 @@ pipeline {
                 steps {
                    sh "env"
                    sh "echo This stage should run only from the PR"
+                   sh "echo SERVER CREATED & DELETED"
              //    sh "ansible-playbook robot-dryrun.yml -e COMPONENT=frontend -e ENV=dev -e ansible_user=centos -e ansible_password=DevOps321"
                 }
             }
@@ -28,6 +29,7 @@ pipeline {
             steps {
                     sh "env"
                     sh "echo Running it against TAG $TAG_NAME"
+                                       sh "tag given"
                 }
             }
         }    
