@@ -1,0 +1,36 @@
+pipeline {
+    agent { label 'workstation' }
+    // environment {
+    //     SSH_CRED = credentials('SSH-CRED')
+    // }
+
+    stages {
+        stage('Performing Lint Checks') {
+            // when { branch pattern: "feature.*", comparator: "REGEXP"}
+            steps {
+                sh "env"
+                sh "echo This stage should only run against the feature branch only"
+                sh "echo LINT CHECKS COMPLETED"
+            }
+        }
+        
+        stage('Performing Ansible Dryrun') {
+            // when { branch pattern: "PR-.*", comparator: "REGEXP"}
+                steps {
+                   sh "env"
+                   sh "echo This stage should run only from the PR"
+                   sh "echo SERVER CREATED & DELETED"
+             //    sh "ansible-playbook robot-dryrun.yml -e COMPONENT=frontend -e ENV=dev -e ansible_user=centos -e ansible_password=DevOps321"
+                }
+            }
+
+        stage('Testing The Release with tag') {
+            // when { expression { env.TAG_NAME != null } }
+            steps {
+                    sh "env"
+                    sh "echo Running it against TAG $TAG_NAME"
+                    sh "well done --- tag given ---thanks"
+                }
+            }
+        }    
+    }
