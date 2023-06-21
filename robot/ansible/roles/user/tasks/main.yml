@@ -1,9 +1,0 @@
-- name: Setting Host Name
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: sethost 
-
-- name: Configuring NodeJS Component 
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: nodejs 
