@@ -23,6 +23,10 @@ def lintChecks() {
                 sh "echo list checks started for payment * * * * ......"
                 sh "echo Lint Checks Completed for $COMPONENT"       
         }
+        else if(env.APPTYPE == "golang") {
+                sh "echo list checks started for golang * * * * ......"
+                sh "echo Lint Checks Completed for $COMPONENT"       
+        }
         else 
                 sh "echo doing generic lint check"
 
