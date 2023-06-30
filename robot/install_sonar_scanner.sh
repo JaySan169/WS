@@ -6,5 +6,5 @@ unzip sonar-scanner-cli-4.5.0.2216-linux.zip
 rm -rf sonar
 mv sonar-scanner-4.5.0.2216-linux sonar 
 ln -s /opt/sonar/bin/sonar-scanner /bin/sonar-scanner 
-curl -s https://gitlab.com/thecloudcareers/opensource/-/raw/master/sonar-scanner/sonar-quality-gate.sh >/bin/sonar-quality-gate.sh
+curl -s https://github.com/JaySan169/WS/blob/main/robot/install_sonar_scanner.sh >/bin/sonar-quality-gate.sh
 chmod +x /bin/sonar-quality-gate.sh
