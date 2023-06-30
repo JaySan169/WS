@@ -28,6 +28,7 @@ echo "sonar-scanner.... Installed"
 Stat $?
 
 pip install boto &>/tmp/jinstall.log
+echo "boto.... Installed"
 Stat $?
 
 wget --no-check-certificate -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo &>>/tmp/jinstall.log 
