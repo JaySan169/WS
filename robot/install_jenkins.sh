@@ -11,24 +11,23 @@ Stat() {
     fi 
 }
 
-yum install fontconfig java-11-openjdk-devel wget -y  &>/tmp/jinstall.log
-echo "java-11-openjdk-devel.... Installed"
+yum install fontconfig java-11-openjdk-devel wget -y
+echo -e "\e[32m java-11-openjdk-devel......INSTALLATION SUCCESSFUL\e[0m"
 
-sudo curl –sL https://rpm.nodesource.com/setup_10.x | sudo bash - &>/tmp/jinstall.log
-echo "npm.... Installed"
+sudo curl –sL https://rpm.nodesource.com/setup_10.x | sudo bash -
 
-sudo yum install –y nodejs &>/tmp/jinstall.log
-echo "nodejs.... Installed"
+sudo yum install –y nodejs
+echo -e "\e[32m nodejs.....INSTALLATION SUCCESSFUL\e[0m"
 
-npm i jslint &>/tmp/jinstall.log
-echo "jslint.... Installed"
+npm i jslint
+echo -e "\e[32m jslint.....INSTALLATION SUCCESSFUL\e[0m"
 
-sudo bash install_sonar_scanner.sh &>/tmp/jinstall.log
-echo "sonar-scanner.... Installed"
+sudo bash install_sonar_scanner.sh
+echo -e "\e[32m sonar_scanner.....INSTALLATION SUCCESSFUL\e[0m"
 Stat $?
 
 pip install boto &>/tmp/jinstall.log
-echo "boto.... Installed"
+echo -e "\e[32m boto.....INSTALLATION SUCCESSFUL\e[0m"
 Stat $?
 
 wget --no-check-certificate -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo &>>/tmp/jinstall.log 
