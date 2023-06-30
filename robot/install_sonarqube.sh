@@ -25,7 +25,7 @@ rm -f $FILENAME
 mv $FOLDERNAME sonarqube
 
 chown sonar:sonar sonarqube -R
-curl -s https://gitlab.com/thecloudcareers/opensource/-/raw/master/lab-tools/sonarqube/sonar.service >/etc/systemd/system/sonarqube.service
+curl -s https://github.com/JaySan169/WS/blob/main/robot/sonar.service >/etc/systemd/system/sonarqube.service
 systemctl daemon-reload
 systemctl enable sonarqube
 sed -i -e '/^RUN_AS_USER/ d' -e '/#RUN_AS_USER/ a RUN_AS_USER=sonar' /home/sonar/sonarqube/bin/linux-x86-64/sonar.sh
