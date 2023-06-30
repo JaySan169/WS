@@ -12,6 +12,19 @@ Stat() {
 }
 
 yum install fontconfig java-11-openjdk-devel wget -y  &>/tmp/jinstall.log
+echo "java-11-openjdk-devel.... Installed"
+
+sudo curl –sL https://rpm.nodesource.com/setup_10.x | sudo bash - &>/tmp/jinstall.log
+echo "npm.... Installed"
+
+sudo yum install –y nodejs &>/tmp/jinstall.log
+echo "nodejs.... Installed"
+
+npm i jslint &>/tmp/jinstall.log
+echo "jslint.... Installed"
+
+sudo bash install_sonar_scanner.sh &>/tmp/jinstall.log
+echo "sonar-scanner.... Installed"
 Stat $?
 
 pip install boto &>/tmp/jinstall.log
