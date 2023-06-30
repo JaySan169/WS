@@ -14,7 +14,7 @@ Stat() {
 yum install fontconfig java-11-openjdk-devel wget -y  &>/tmp/jinstall.log
 echo "java-11-openjdk-devel.... Installed"
 
-sudo curl –sL https://rpm.nodesource.com/setup_10.x | sudo bash &>/tmp/jinstall.log
+sudo curl –sL https://rpm.nodesource.com/setup_10.x | sudo bash - &>/tmp/jinstall.log
 echo "npm.... Installed"
 
 sudo yum install –y nodejs &>/tmp/jinstall.log
